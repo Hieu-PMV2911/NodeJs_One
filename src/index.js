@@ -1,10 +1,17 @@
 import express from "express"
-const app = express()
-const port = 3000
+import viewEngine from "./config/viewConfig"
+import webRoute from "./Routers/webRoute"
+require("dotenv").config();
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const app = express()
+const port = process.env.PORT || 8000;
+
+//set up engine 
+viewEngine(app);
+
+//set up routes
+webRoute(app);
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

@@ -1,8 +1,8 @@
 import express from "express";	
 
 const viewEngine = (app) => {
-	app.use("view engine", "ejs");
-	app.set("app", "src/view");
+	app.set("view engine", "ejs");
+	app.set("views", "./src/views");
 }
 
 export default viewEngine
