@@ -1,20 +1,14 @@
 // get the client
-import mysql  from 'mysql2';
+import mysql  from 'mysql2/promise';
 
-// create the connection to database
-const connection = mysql.createConnection({
+const connection = mysql.createPool({
   host: 'localhost',
   user: 'root',
-  database: 'nodejs_one'
+  database: 'nodejs_one',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
-// simple query
-// connection.query(
-//   'SELECT * FROM `users` ',
-//   function(err, results, fields) {
-// 	console.log("connect success");
-//     console.log(results); // results contains rows returned by server
-//   }
-// );
 
 export default connection

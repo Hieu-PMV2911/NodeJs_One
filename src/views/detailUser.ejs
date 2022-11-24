@@ -63,19 +63,17 @@ tr:hover {background-color: #ccc;}
 		<th>ID</th>
 		<th>First Name</th>
 		<th>Last Name</th>
-		<th>Actions</th>
+		<th>Email</th>
+		<th>Address</th>
 	</tr>
 	<tbody>
-		<% for(var i=0; i < dataUser.length; i++) { %>
+		<% for(var i = 0;  i < detailUser.length; i++) { %>
 			<tr>
-				<td><%= dataUser[i].id %></td>
-				<td><%= dataUser[i].First_name %></td>
-				<td><%= dataUser[i].Last_name %></td>
-				<td>
-					<button type="button"><a href="/detail/user/<%= dataUser[i].id %>">Detail</a></button>
-					<button type="button"><a href="/edit/user/<%= dataUser[i].id %>">Edit</a></button>
-					<button type="button"><a href="/delete/user/<%= dataUser[i].id %>">Delete</a></button>
-				</td>
+				<td><%= detailUser[i].id %></td>
+				<td><%= detailUser[i].First_name %></td>
+				<td><%= detailUser[i].Last_name %></td>
+				<td><%= detailUser[i].email %></td>
+				<td><%= detailUser[i].address %></td>
 			</tr>
 		<% } %>
 	</tbody>
