@@ -1,10 +1,25 @@
 import express from "express"
-const app = express()
-const port = 3000
+import viewEngine from "./config/viewConfig"
+import webRoute from "./Routers/webRoute"
+import connection from "./config/connectDB"
+const methodOverride = require('method-override')
+require("dotenv").config();
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const app = express()
+const port = process.env.PORT || 8000;
+
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
+app.use(methodOverride('_method'))
+
+//set up engine 
+viewEngine(app);
+
+//set up routes
+webRoute(app);
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

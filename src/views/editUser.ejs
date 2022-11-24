@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<h2 style="text-align:center;">Add Users</h2>
+	<% for(var i = 0;  i < editUser.length; i++) { %>
+	<form action="/update/user/<%= editUser[i].id %>" style="text-align:center" method="post">
+	<label for="fname">First name:</label><br>
+	<input type="text" name="First_name" value="<%= editUser[i].First_name %>"><br><br>
+
+	<label for="lname">Last name:</label><br>
+	<input type="text" name="Last_name" value="<%= editUser[i].Last_name %>"><br><br>
+
+	<label for="lname">Email:</label><br>
+	<input type="email" name="email" value="<%= editUser[i].email %>"><br><br>
+	
+	<label for="lname">Address:</label><br>
+	<input type="text"  name="address" value="<%= editUser[i].address %>"><br><br>
+
+	<input type="submit" value="Submit">
+	</form> 
+	<% } %>
+</body>
+</html>
