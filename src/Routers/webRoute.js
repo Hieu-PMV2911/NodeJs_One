@@ -9,7 +9,8 @@ const webRoute = (app) => {
 	route.get('/edit/user/:id', homePageController.getEditPage);
 	route.post('/update/user/:id', homePageController.putUpdatePage);
 	route.get('/delete/user/:id', homePageController.getDeletePage);
-
+	route.post('/upload-file', homePageController.postUploadFile);
+	
 
 	// return app.use("/detail/user/:id", route);
 	return app.use("/", route);

@@ -1,5 +1,7 @@
 import connection from "../config/connectDB"
 import mysql from 'mysql2/promise';
+const formidable = require('formidable');
+const path = require('path');
 // import bluebird from 'bluebird';
 const HomePageControllers = async (req, res) => {
 	//  connection.query("SELECT * FROM `users`", function(err, rows, fields) {
@@ -49,7 +51,43 @@ const getDeletePage = async (req, res) => {
 	
 }
 
-				
+const isFileValid = (file) => {
+	const type = file.type.split("/").pop();
+	const validTypes = ["jpg", "jpeg", "png", "pdf"];
+	if (validTypes.indexOf(type) === -1) {
+	  return false;
+	}
+	return true;
+      };
+
+const postUploadFile = async (req, res, next) => {
+	const form = formidable({ multiples: true });
+	// const uploadFolder = path.join(__dirname, "public");
+	form.on('someExpressFiles', function (name, file){
+		file.filepath = __dirname + '/public/' + file.originalFilename;
+	});
+
+	form.multiples = true;
+	form.maxFileSize = 50 * 1024 * 1024; // 5MB
+	// form.uploadDir = uploadFolder;
+	console.log(form);
+
+	form.parse(req, async (err, fields, files) => {
+	if (err) {
+		next(err);
+		return;
+	}
+	console.log (req.file)
+		res.send(
+			`
+			<h2 style="text-align:center;">Upload File</h2>
+				<img width="300" height="300" src="./public/${files.someExpressFiles.originalFilename}" />
+				<a type="submit" value="BACK" href="/" >BACK</a>
+			`
+		);
+	});
+
+}			
 
 
 module.exports = {
@@ -58,5 +96,6 @@ module.exports = {
 	postAddUsersPage,
 	getEditPage,
 	putUpdatePage,
-	getDeletePage
+	getDeletePage,
+	postUploadFile
 }
